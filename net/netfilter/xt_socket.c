@@ -57,6 +57,7 @@ extract_icmp4_fields(const struct sk_buff *skb,
 	struct iphdr *inside_iph, _inside_iph;
 	struct icmphdr *icmph, _icmph;
 	__be16 *ports, _ports[2];
+	protocol = 0;
 
 	icmph = skb_header_pointer(skb, outside_hdrlen,
 				   sizeof(_icmph), &_icmph);
@@ -108,13 +109,17 @@ xt_socket_get4_sk(const struct sk_buff *skb, struct xt_action_param *par)
 	const struct iphdr *iph = ip_hdr(skb);
 	struct udphdr _hdr, *hp = NULL;
 	struct sock *sk;
-	__be32 daddr, saddr;
-	__be16 dport, sport;
+	__be32 daddr = 0;
+	__be32 saddr = 0;
+	__be16 dport = 0;
+	__be16 sport = 0;
 	u8 protocol;
 #ifdef XT_SOCKET_HAVE_CONNTRACK
 	struct nf_conn const *ct;
 	enum ip_conntrack_info ctinfo;
 #endif
+
+	protocol = 0;
 
 	if (iph->protocol == IPPROTO_UDP || iph->protocol == IPPROTO_TCP) {
 		hp = skb_header_pointer(skb, ip_hdrlen(skb),
@@ -271,8 +276,10 @@ xt_socket_get6_sk(const struct sk_buff *skb, struct xt_action_param *par)
 	struct ipv6hdr *iph = ipv6_hdr(skb);
 	struct udphdr _hdr, *hp = NULL;
 	struct sock *sk;
-	struct in6_addr *daddr, *saddr;
-	__be16 dport, sport;
+	struct in6_addr *daddr = NULL;
+	struct in6_addr *saddr = NULL;
+	__be16 dport = 0;
+	__be16 sport = 0;
 	int thoff, tproto;
 
 	tproto = ipv6_find_hdr(skb, &thoff, -1, NULL);

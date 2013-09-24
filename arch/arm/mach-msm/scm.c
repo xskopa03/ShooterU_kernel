@@ -22,6 +22,8 @@
 
 #include <mach/scm.h>
 
+asm(".arch_extension sec\n\t");
+
 static int simlock_mask;
 static int unlock_mask;
 static char *simlock_code = "";
