@@ -1524,7 +1524,7 @@ shrink_inactive_list(unsigned long nr_to_scan, struct zone *zone,
 	unsigned long nr_scanned;
 	unsigned long nr_reclaimed = 0;
 	unsigned long nr_taken;
-	unsigned long nr_anon;
+	unsigned long nr_anon = 0;
 	unsigned long nr_file;
 	unsigned long nr_dirty = 0;
 	unsigned long nr_writeback = 0;
@@ -1898,7 +1898,7 @@ static unsigned long shrink_list(enum lru_list lru, unsigned long nr_to_scan,
 static void get_scan_count(struct zone *zone, struct scan_control *sc,
 					unsigned long *nr, int priority)
 {
-	unsigned long anon, file, free;
+	unsigned long anon = 0, file = 0, free;
 	unsigned long anon_prio, file_prio;
 	unsigned long ap, fp;
 	struct zone_reclaim_stat *reclaim_stat = get_reclaim_stat(zone, sc);
