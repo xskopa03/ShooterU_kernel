@@ -184,7 +184,7 @@ static int truthtable_set(void *data, u64 val)
 static int truthtable_get(void *data, u64 *val)
 {
 	int rc;
-	u16 truthtable;
+	u16 truthtable = 0;
 
 	rc = pm8xxx_upl_read_truthtable(data, &truthtable);
 	if (rc)

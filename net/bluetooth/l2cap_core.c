@@ -1254,7 +1254,7 @@ int l2cap_do_connect(struct sock *sk)
 	struct hci_conn *hcon;
 	struct hci_dev *hdev;
 	__u8 auth_type;
-	int err;
+	int err = 0;
 
 	BT_DBG("%s -> %s psm 0x%2.2x", batostr(src), batostr(dst),
 							l2cap_pi(sk)->psm);
@@ -3954,7 +3954,7 @@ static void l2cap_conf_ext_fs_get(struct sock *sk, void *rsp, int len)
 static int l2cap_finish_amp_move(struct sock *sk)
 {
 	struct l2cap_pinfo *pi;
-	int err;
+	int err = 0;
 
 	BT_DBG("sk %p", sk);
 
@@ -5674,7 +5674,7 @@ static inline int l2cap_conn_param_update_req(struct l2cap_conn *conn,
 	struct l2cap_conn_param_update_req *req;
 	struct l2cap_conn_param_update_rsp rsp;
 	u16 min, max, latency, to_multiplier, cmd_len;
-	int err;
+	int err = 0;
 
 	if (!(hcon->link_mode & HCI_LM_MASTER))
 		return -EINVAL;
@@ -5807,7 +5807,7 @@ static inline void l2cap_sig_channel(struct l2cap_conn *conn,
 	u8 *data = skb->data;
 	int len = skb->len;
 	struct l2cap_cmd_hdr cmd;
-	int err;
+	int err = 0;
 
 	l2cap_raw_recv(conn, skb);
 
