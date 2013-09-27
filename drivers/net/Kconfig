@@ -147,6 +147,12 @@ config TUN
 
 	  If you don't know what to use this for, you don't need it.
 
+config FRANDOM
+	  tristate "Frandom"
+	  select CRC32
+	  ---help---
+	    Frandom.
+
 config VETH
 	tristate "Virtual ethernet pair device"
 	---help---
