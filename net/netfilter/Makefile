@@ -4,6 +4,11 @@ nf_conntrack-y	:= nf_conntrack_core.o nf_conntrack_standalone.o nf_conntrack_exp
 nf_conntrack-$(CONFIG_NF_CONNTRACK_TIMESTAMP) += nf_conntrack_timestamp.o
 nf_conntrack-$(CONFIG_NF_CONNTRACK_EVENTS) += nf_conntrack_ecache.o
 
+
+
+CFLAGS_xt_qtaguid.o += -O2
+CFLAGS_xt_socket.o += -O2
+
 CFLAGS_nf_conntrack_proto.o = -Wno-address
 CFLAGS_nf_conntrack_core.o = -Wno-address
 
